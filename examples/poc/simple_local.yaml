@@ -3,7 +3,7 @@
   frequency: 30
   logger   : [img_player, img_player.log]
   others   :
-    - image_path    : /home/user/aruco_sample
+    - image_path    : /home/geng/Downloads/FleXR/resources/aruco_sample
       filename_zeros: 6
       num_of_images : 500
       iterate       : true

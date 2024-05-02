@@ -47,24 +47,29 @@ namespace flexr
       std::cout << "\tImage path: " << imgPath << std::endl;
       std::cout << "\tFielname Zeros: " << fnZeros << ", Total # of images: " << nImgs << std::endl;
       std::cout << "\tIterate: " << iterate << ", Initial caching: " << caching << std::endl;
+      std::cout << "Others end--------" << std::endl;
     }
 
 
     void* YamlImgPlayer::make()
     {
+      std::cout << "--------Start make-------" << std::endl;
       if(baseSet && specificSet)
       {
         kernels::ImgPlayer *temp = new kernels::ImgPlayer(id, imgPath, fnZeros, frequency, nImgs, iterate, caching);
         temp->setFrequency(frequency);
         temp->setLogger(loggerId, loggerFileName);
+        std::cout << "--------new kernels::ImgPlayer-------" << std::endl;
 
         for(int i = 0; i < outPorts.size(); i++)
         {
           // Kernel specified ports
           if(outPorts[i].portName == "out_frame")
           {
-            if(outPorts[i].connectionType == "local")
+            if(outPorts[i].connectionType == "local"){
               temp->activateOutPortAsLocal<kernels::ImgPlayerMsgType>(outPorts[i]);
+              std::cout << "--------activateOutPortAsLocal-------" << std::endl;
+            }
             else if(outPorts[i].connectionType == "remote")
               temp->activateOutPortAsRemote<kernels::ImgPlayerMsgType>(outPorts[i]);
           }
@@ -95,4 +100,5 @@ namespace flexr
 }
 
 #endif
+
 
